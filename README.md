@@ -11,7 +11,7 @@ This Programs purpose is to download the content of a Reddit thread and save tha
 2. cd to the repository "Reddit_Scraper"
 
 3. Create an environment with the details of the listed yaml file
-   ``` conda env create -f requirments.yml ```
+   ``` conda env create -f requirements.yaml ```
 
 4. Activate the newly created environment
    ``` conda activate "Your named env" ```
