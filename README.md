@@ -16,6 +16,7 @@ This Programs purpose is to download the content of a Reddit thread and save tha
 4. Activate the newly created environment
    ``` conda activate "Your named env" ```
 ### Running the Project
-``` python redditScraper.py  https://www.reddit.com/r/CBRNE/ output.txt ```
+``` python redditScraper.py  [https://old.reddit.com/r/CBRNE/](https://old.reddit.com/r/CBRNE/comments/168fbpr/which_version_of_the_jcad_can_actually_detect/) output.txt ```
 
-NOTE: You may use whatever thread you wish but the  "output.txt" is required, this is the location file to which the data will be save to.
+NOTE: You may use whatever thread URL you wish but the replace the "www." portion with "old." 
+and "output.txt" is required, this is the location file to which the data will be save to.
