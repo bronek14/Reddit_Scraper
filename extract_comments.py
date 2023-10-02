@@ -11,8 +11,8 @@ def extract_comments(input_filename, output_filename):
         collecting_comments = False
 
         for line in lines:
-            # Check if the line starts with "Comment:" to start collecting comments
-            if line.strip().startswith("Comment:"):
+            # Check if the line contains "[-]" to start collecting comments
+            if "[-]" in line:
                 collecting_comments = True
                 continue
             # Check if we are currently collecting comments and the line is not empty
