@@ -1,39 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
 
-# Function to scrape Reddit data from a URL and save it to a file
-def scrape_reddit_data(url, output_file):
-    try:
-        # Send a GET request to the Reddit URL
-        response = requests.get(url)
+# Define the Reddit URL you want to scrape
+reddit_url = 'https://www.reddit.com/r/Python/comments/'
 
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200:
-            # Parse the HTML content of the page
-            soup = BeautifulSoup(response.text, 'html.parser')
+# Make an HTTP GET request to the URL
+response = requests.get(reddit_url)
 
-            # Find and extract the relevant data (e.g., post titles, comments)
-            # Modify this part to extract the specific data you're interested in
-            data_to_extract = []
-
-            # Save the extracted data to the output file
-            with open(output_file, 'w', encoding='utf-8') as file:
-                for item in data_to_extract:
-                    file.write(item + '\n')
-
-            print(f"Data scraped and saved to {output_file}")
-        else:
-            print(f"Failed to retrieve data from {url}. Status code: {response.status_code}")
-
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-
-if __name__ == "__main__":
-    # Input Reddit URL
-    reddit_url = input("Enter the Reddit URL: ")
-
-    # Output file name
-    output_file = "output.txt"
-
-    # Call the function to scrape and save data
-    scrape_reddit_data(reddit_url, output_file)
+if response.status_code == 200:
+    # Parse the HTML content of the page using BeautifulSoup
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # Find and extract the text content
+    page_text = soup.get_text()
+    
+    # Tokenize the text into words using NLTK
+    words = word_tokenize(page_text)
+    
+    # Filter out non-alphanumeric words and convert to lowercase
+    words = [word.lower() for word in words if word.isalnum()]
+    
+    # Create a set of unique words to remove duplicates
+    unique_words = set(words)
+    
+    # Write the words to the output.txt file
+    with open('output.txt', 'w', encoding='utf-8') as output_file:
+        output_file.write('\n'.join(unique_words))
+    
+    print(f"Data scraped and saved to 'output.txt'.")
+else:
+    print(f"Failed to fetch the Reddit page. Status code: {response.status_code}")
