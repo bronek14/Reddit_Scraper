@@ -12,16 +12,18 @@ def scrape_reddit_thread(url, output_file="output.txt"):
             # Parse the HTML content of the page
             soup = BeautifulSoup(response.text, 'html.parser')
 
-            # Find the title of the Reddit thread
-            title = soup.title.string
+            # Find all comments and replies
+            comments = soup.find_all("div", {"class": "comment"})
 
-            # Find all the post content (e.g., comments) and store it in a list
-            post_content = []
-            for post in soup.find_all("div", {"class": "md"}):
-                post_content.append(post.get_text())
+            # Extract text from comments and replies
+            comment_texts = []
+            for comment in comments:
+                comment_text = comment.find("div", {"class": "md"})
+                if comment_text:
+                    comment_texts.append(comment_text.get_text())
 
-            # Combine the title and post content into a single string
-            thread_data = f"Title: {title}\n\n{'-'*40}\n\n" + "\n\n".join(post_content)
+            # Combine all comments into a single string
+            thread_data = "\n\n".join(comment_texts)
 
             # Save the data to the output file
             with open(output_file, "w", encoding="utf-8") as file:
