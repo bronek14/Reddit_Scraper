@@ -4,8 +4,13 @@ from bs4 import BeautifulSoup
 # Function to scrape and save data
 def scrape_and_save(url, output_filename):
     try:
-        # Send a GET request to the provided URL
-        response = requests.get(url)
+        # Define a user agent to mimic a web browser
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
+        }
+
+        # Send a GET request to the provided URL with headers
+        response = requests.get(url, headers=headers)
 
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
