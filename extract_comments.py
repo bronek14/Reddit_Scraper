@@ -1,37 +1,22 @@
-# Function to extract comments from a Reddit data text file and save to 'comments.txt'
-def extract_comments_and_save(file_path):
+def extract_comments(input_file="output.txt", output_file="comments.txt"):
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            lines = file.readlines()
-        
-        comments_section = False
-        comments = []
+        # Read the content from the input file
+        with open(input_file, "r", encoding="utf-8") as file:
+            content = file.read()
 
-        for line in lines:
-            line = line.strip()
+        # Split the content into separate comments
+        comments = content.split('\n\n')
 
-            # Check if we are inside the comments section
-            if line == "comments":
-                comments_section = True
-                continue
+        # Filter out any empty comments
+        comments = [comment.strip() for comment in comments if comment.strip()]
 
-            if comments_section and line:
-                comments.append(line)
+        # Combine the comments into a single string
+        comments_text = "\n\n".join(comments)
 
-        if comments:
-            # Save the comments to 'comments.txt'
-            output_file = 'comments.txt'
-            with open(output_file, 'w', encoding='utf-8') as out_file:
-                for comment in comments:
-                    out_file.write(comment + '\n')
-            
-            print(f"Extracted comments saved to {output_file}")
-        else:
-            print("No comments found in the file.")
+        # Save the comments to the output file
+        with open(output_file, "w", encoding="utf-8") as file:
+            file.write(comments_text)
 
+        print(f"Extracted comments successfully and saved to {output_file}")
     except Exception as e:
-        print(f"Error: {str(e)}")
-
-if __name__ == "__main__":
-    input_file = "output.txt"  # Replace with the path to your saved Reddit data text file
-    extract_comments_and_save(input_file)
+        print(f"An error occurred: {str(e)}")
