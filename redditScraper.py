@@ -4,8 +4,8 @@ import nltk
 from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 
-# Define the Reddit URL you want to scrape
-reddit_url = 'https://www.reddit.com/r/Python/comments/'
+# Prompt the user for the Reddit URL
+reddit_url = input("Enter the Reddit URL you want to scrape: ")
 
 # Make an HTTP GET request to the URL
 response = requests.get(reddit_url)
