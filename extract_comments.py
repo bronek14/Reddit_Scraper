@@ -11,7 +11,7 @@ def extract_comments_and_save(file_path):
             line = line.strip()
 
             # Check if we are inside the comments section
-            if line == "Comments:":
+            if line == "comments":
                 comments_section = True
                 continue
 
