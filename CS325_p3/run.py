@@ -1,5 +1,5 @@
 # This file is a rudientary directory change to access the functionality of all of the subfolders of CS325_p3
-
+# Inputs needed: a reddit link of your choosing.
 
 import os
 import subprocess
