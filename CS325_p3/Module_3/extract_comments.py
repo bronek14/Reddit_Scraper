@@ -1,5 +1,6 @@
 #The functionality of this Module is to access the Data stored in the Raw subfolder of Data and futher refine it, throwing out any data that isnt strickly a user comment. This new set of data 
 # will be stored in the Processed subfolder to Data.
+# expected inputs include: the output.txt file that is stored in Data\\Raw\\
 
 
 # Function to filter and save non-matching lines to comments.txt
