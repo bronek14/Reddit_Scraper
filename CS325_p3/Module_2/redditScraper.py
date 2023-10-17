@@ -1,6 +1,6 @@
 
 # The functionality of this Module is to connect to a given reddit link and extract its written data to be exported to the Raw subfolder found in the Data folder for later refinement
-
+#inputs required, a reddit link
 
 import requests
 from bs4 import BeautifulSoup
